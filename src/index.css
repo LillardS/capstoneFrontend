@@ -145,7 +145,7 @@ header a:not(:last-child) {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  max-width: 25rem;
+  max-width: 16rem;
   min-height: 25rem;
   padding: .5rem;
   margin: 2.5rem;
@@ -159,6 +159,10 @@ header a:not(:last-child) {
   height: 15rem;
   border: .25rem solid black;
   border-radius: .75rem;
+}
+
+.places-home .detail-list {
+  text-align: center;
 }
 
 /* activities secition on the home page */
@@ -187,7 +191,7 @@ header a:not(:last-child) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 25rem;
+  max-width: 16rem;
   min-height: 25rem;
   padding: .5rem;
   margin: 2.5rem;
@@ -201,6 +205,10 @@ header a:not(:last-child) {
   height: 15rem;
   border: .25rem solid black;
   border-radius: .75rem;
+}
+
+.activities-home .detail-list {
+  text-align: center;
 }
 
 /* about section on the home page */
@@ -410,8 +418,8 @@ header a:not(:last-child) {
 }
 
 .attractions .attraction-details img {
-  width: 25rem;
-  height: 25rem;
+  width: 20rem;
+  height: 20rem;
   border: .25rem solid black;
   border-radius: .75rem;
 }
@@ -427,6 +435,91 @@ header a:not(:last-child) {
   font-weight: bold;
 }
 
+/* attraction form */
+
+.attraction-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.attraction-form h3 {
+  font-size: 1.5rem;
+}
+
+.attraction-form .create {
+  display: flex;
+  flex-direction: column;
+  column-count: 2;
+  background: var(--orange);
+  border: black 5px solid;
+  border-radius: .75rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin: 1.5rem;
+  padding: 1.5rem;
+}
+
+.create label {
+  font-size: 1.2rem;
+  margin-top: 2.5rem;
+  padding: 1.2rem;
+  color: white;
+  font-weight: bold;
+}
+
+.create input {
+  width: 25rem;
+  height: 1.5rem;
+  font-size: 1.2rem;
+  text-align: center;
+  border: black 2.5px solid;
+  border-radius: .75rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.create input:focus {
+  outline: none;
+}
+
+.create select {
+  width: 25rem;
+  height: 1.85rem;
+  text-align: center;
+  border: black 2.5px solid;
+  border-radius: .75rem;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.create textarea {
+  width: 25rem;
+  height: 5rem;
+  text-align: center;
+  border: black 2.5px solid;
+  border-radius: .75rem;
+  outline: none;
+  margin-bottom: 1.1rem;
+  resize: none;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.create button {
+  color: white;
+  background: var(--orange);
+  width: 5rem;
+  margin: auto;
+  border-style:;
+  border: 2.5px dashed black;
+  border-radius: .75rem;
+}
+
+.create .error {
+  max-width: 25rem;
+  margin-top: 1.1rem;
+}
+
 /* header */
 
 .title-image {
@@ -434,7 +527,7 @@ header a:not(:last-child) {
   box-shadow: rgba(251, 79, 20, 2) 0px 5px, rgba(230, 128, 0) 0px 10px, rgba(255, 165, 44) 0px 15px, rgba(254, 186, 79) 0px 20px, rgba(251, 206, 177) 0px 25px;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 40rem;
+  height: 35rem;
   padding: 0;
   margin-top: 0;
   display: flex;
@@ -446,16 +539,6 @@ header a:not(:last-child) {
   align-items: center;
   justify-content: space-evenly;
   font-size: 2.5rem;
-}
-
-button {
-  background: var(--orange);
-  height: 3rem;
-  color: #ffffff;
-  border: 10px solid black;
-  position: relative;
-  top: -1.5rem;
-  left: 50%;
 }
 
 /* footer */
