@@ -10,15 +10,16 @@ const AttractionForm = () => {
     const [ venue, setVenue ] = useState('');
     const [ rating, setRating ] = useState('');
     const [ error, setError ] = useState(null);
+    const [ likes, setLikes ] = useState(0);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const attraction = {image, title, hours, address, description, type, venue, rating, likes: 0};
+        const attraction = {image, title, hours, address, description, type, venue, rating, likes:0};
 
         const response = await fetch('/Places', {
             method: 'POST',
-            body: JSON.stringify(attraction),
+            body: JSON.stringify(attraction, {likes: likes + 1}),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -38,12 +39,19 @@ const AttractionForm = () => {
             setRating('');
             setDescription('');
             setError(null);
+            setLikes(0);
             console.log('New Attraction Added', json);
         }
     }
 
     return (
         <form id="attraction" className="create" onSubmit={handleSubmit}>
+            <label for="likes">Likes:</label>
+            <select form_id="attraction" id="likes" onChange={(e) => setLikes(e.target.value)} value={likes}>
+                <option value='0'>---</option>
+                <option value='0'>0</option>
+                <option value="1">1</option>
+            </select>
             <label for="image">Attraction Image(url):</label>
             <input id="image" type='url' onChange={(e) => setImage(e.target.value)} value={image} />
             <label for="title">Attraction Title:</label>

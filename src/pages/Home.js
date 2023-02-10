@@ -5,12 +5,13 @@ import HomePlaces from "../components/HomePlaces";
 import AttractionForm from "../components/AttractionForm";
 const _ = require('lodash');
 
-
 const Home = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
+
     const [activities, setActivities] = useState(null);
+
     useEffect(() => {
 
         const fetchActivities = async () => {
@@ -39,11 +40,12 @@ const Home = () => {
         fetchPlaces();
     }, []);
 
+
     return (
         <div className="home">
             <h2 className="home-title"><a href="#places">Come to the Queen City and enjoy everything we have to offer!</a></h2>
             <div className="container attraction-form">
-            <h3>Add a New Attraction!</h3>
+                <h3>Add a New Attraction!</h3>
                 <AttractionForm />
             </div>
             <div id="places" className="container places-home">
