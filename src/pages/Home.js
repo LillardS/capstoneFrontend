@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import HomeActivities from "../components/HomeActivites";
 import HomePlaces from "../components/HomePlaces";
 import AttractionForm from "../components/AttractionForm";
+import { useAttractionsContext } from "../hooks/useAttractionsContext";
 const _ = require('lodash');
 
 const Home = () => {
@@ -40,9 +41,22 @@ const Home = () => {
         fetchPlaces();
     }, []);
 
-
     return (
         <div className="home">
+            <div className="weather-widget">
+                {/* <a class="weatherwidget-io" href="https://forecast7.com/en/39d10n84d51/cincinnati/?unit=us" data-label_1="CINCINNATI" data-label_2="WEATHER" data-theme="original" >CINCINNATI WEATHER</a>
+                {
+                    !function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = 'https://weatherwidget.io/js/widget.min.js';
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }
+                    }(document, 'script', 'weatherwidget-io-js')
+                } */}
+            </div>
             <h2 className="home-title"><a href="#places">Come to the Queen City and enjoy everything we have to offer!</a></h2>
             <div className="container attraction-form">
                 <h3>Add a New Attraction!</h3>

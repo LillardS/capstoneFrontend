@@ -46,12 +46,6 @@ const AttractionForm = () => {
 
     return (
         <form id="attraction" className="create" onSubmit={handleSubmit}>
-            <label for="likes">Likes:</label>
-            <select form_id="attraction" id="likes" onChange={(e) => setLikes(e.target.value)} value={likes}>
-                <option value='0'>---</option>
-                <option value='0'>0</option>
-                <option value="1">1</option>
-            </select>
             <label for="image">Attraction Image(url):</label>
             <input id="image" type='url' onChange={(e) => setImage(e.target.value)} value={image} />
             <label for="title">Attraction Title:</label>
