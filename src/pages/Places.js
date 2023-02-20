@@ -1,4 +1,6 @@
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
+import { useAttractionsContext } from '../hooks/useAttractionsContext';
+import _ from 'lodash';
 
 // components
 import PlaceDetails from '../components/PlaceDetails';
@@ -7,20 +9,22 @@ const Places = () => {
     useLayoutEffect(() => {
         window.scrollTo(0,0);
     });
-    const [places, setPlaces] = useState(null);
+    const { attractions, dispatch } = useAttractionsContext();
+
     useEffect(() => {
 
-        const fetchPlaces = async () => {
+        const fetchAttractions = async () => {
             const response = await fetch('/Places');
             const json = await response.json();
 
             if (response.ok) {
-                setPlaces(json);
+                dispatch({ type: 'SET_ATTRACTIONS', payload: json })
             }
         }
 
-        fetchPlaces();
-    }, []);
+        fetchAttractions();
+        
+    }, [dispatch]);
 
     return (
         <div className="attractions">
@@ -31,8 +35,8 @@ const Places = () => {
                 <div id="attraction-title" className='attraction-title'>
                     <h2>Here you can find some different places to visit and see what sparks your imagination!</h2>
                 </div>
-                {places && places.map((place) => (
-                    <PlaceDetails key={place._id} place={place} />
+                {attractions && _.shuffle(attractions.filter(attraction => attraction.type === 'place')).map((attraction) => (
+                    <PlaceDetails key={attraction._id} place={attraction} />
                 ))}
             </div>
         </div>

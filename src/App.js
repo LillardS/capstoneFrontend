@@ -6,6 +6,8 @@ import Places from './pages/Places';
 import Activities from './pages/Activities';
 import About from './pages/About';
 import Contacts from './pages/Contact';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -20,7 +22,7 @@ function App() {
         <div className='pages'>
           <Routes>
             <Route 
-              path='/'
+              path='/Home'
               element={<Home />}
             />
             <Route 
@@ -38,6 +40,14 @@ function App() {
             <Route 
               path='/Contacts'
               element={<Contacts />}
+            />
+            <Route 
+              path='user/Login'
+              element={<Login />}
+            />
+            <Route 
+              path='user/Signup'
+              element={<Signup />}
             />
           </Routes>
         </div>

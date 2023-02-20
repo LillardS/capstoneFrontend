@@ -1,4 +1,6 @@
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
+import { useAttractionsContext } from '../hooks/useAttractionsContext';
+import _ from 'lodash';
 
 // components
 import ActivityDetails from '../components/ActivityDetails';
@@ -7,20 +9,22 @@ const Activities = () => {
     useLayoutEffect(() => {
         window.scrollTo(0,0);
     });
-    const [activities, setActivities] = useState(null);
+    const { attractions, dispatch } = useAttractionsContext();
+
     useEffect(() => {
 
-        const fetchActivities = async () => {
+        const fetchAttractions = async () => {
             const response = await fetch('/Activities');
             const json = await response.json();
 
             if (response.ok) {
-                setActivities(json);
+                dispatch({ type: 'SET_ATTRACTIONS', payload: json })
             }
         }
-
-        fetchActivities();
-    }, []);
+        
+        fetchAttractions();
+        
+    }, [dispatch]);
     
     return (
         <div className="attractions">
@@ -31,8 +35,8 @@ const Activities = () => {
                 <div id="attraction-title" className='attraction-title'>
                     <h2>Here you can find some different activities to visit and see what has you having enending fun!</h2>
                 </div>
-                {activities && activities.map((activity) => (
-                    <ActivityDetails key={activity._id} activity={activity} />
+                {attractions && _.shuffle(attractions.filter(attraction => attraction.type === 'activity')).map((attraction) => (
+                    <ActivityDetails key={attraction._id} activity={attraction} />
                 ))}
             </div>
         </div>

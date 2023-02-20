@@ -1,9 +1,10 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import HomeActivities from "../components/HomeActivites";
 import HomePlaces from "../components/HomePlaces";
 import AttractionForm from "../components/AttractionForm";
 import { useAttractionsContext } from "../hooks/useAttractionsContext";
+import { Helmet } from 'react-helmet';
 const _ = require('lodash');
 
 const Home = () => {
@@ -11,52 +12,24 @@ const Home = () => {
         window.scrollTo(0, 0);
     });
 
-    const [activities, setActivities] = useState(null);
+    const { attractions, dispatch } = useAttractionsContext();
 
     useEffect(() => {
 
-        const fetchActivities = async () => {
-            const response = await fetch('/Activities');
+        const fetchAttractions = async () => {
+            const response = await fetch('/Home');
             const json = await response.json();
 
             if (response.ok) {
-                setActivities(json);
+                dispatch({ type: 'SET_ATTRACTIONS', payload: json })
             }
         }
-
-        fetchActivities();
-    }, []);
-    const [places, setPlaces] = useState(null);
-    useEffect(() => {
-
-        const fetchPlaces = async () => {
-            const response = await fetch('/Places');
-            const json = await response.json();
-
-            if (response.ok) {
-                setPlaces(json);
-            }
-        }
-
-        fetchPlaces();
-    }, []);
+        fetchAttractions();
+        
+    }, [dispatch]);
 
     return (
         <div className="home">
-            <div className="weather-widget">
-                {/* <a class="weatherwidget-io" href="https://forecast7.com/en/39d10n84d51/cincinnati/?unit=us" data-label_1="CINCINNATI" data-label_2="WEATHER" data-theme="original" >CINCINNATI WEATHER</a>
-                {
-                    !function (d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (!d.getElementById(id)) {
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = 'https://weatherwidget.io/js/widget.min.js';
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }
-                    }(document, 'script', 'weatherwidget-io-js')
-                } */}
-            </div>
             <h2 className="home-title"><a href="#places">Come to the Queen City and enjoy everything we have to offer!</a></h2>
             <div className="container attraction-form">
                 <h3>Add a New Attraction!</h3>
@@ -64,15 +37,15 @@ const Home = () => {
             </div>
             <div id="places" className="container places-home">
                 <h2 className="places-home-title">Places To Visit!</h2>
-                {places && _.shuffle(places).slice(0, 3).map((place) => (
-                    <HomePlaces key={place._id} place={place} />
+                {attractions && _.shuffle(attractions.filter(attraction => attraction.type === 'place')).slice(0, 3).map((attraction) => (
+                    <HomePlaces key={attraction._id} place={attraction} />
                 ))}
                 <Link to="/Places"><h2>View some of the amazing places we have to offer!</h2></Link>
             </div>
             <div className="container activities-home">
                 <h2>Fun Activities To Do!</h2>
-                {activities && _.shuffle(activities).slice(0, 3).map((activity) => (
-                    <HomeActivities key={activity._id} activity={activity} />
+                {attractions && _.shuffle(attractions.filter(attraction => attraction.type === 'activity')).slice(0, 3).map((attraction) => (
+                    <HomeActivities key={attraction._id} activity={attraction} />
                 ))}
                 <Link to="/Activities"><h2>View some of the exciting and adventurous activities we have to offer!</h2></Link>
             </div>
@@ -83,6 +56,11 @@ const Home = () => {
             <div className="container contacts-home">
                 <h2>Get In Contact!</h2>
                 <Link to="/Contacts"><h2 className="container-details">Get in contact with me and see other projects I've worked on!</h2></Link>
+            </div>
+            <div className="weather-widget">
+                <div id="3fb7eb4b8c29bbe54ec5c070c0983fd1" className="ww-informers-box-854753"><p className="ww-informers-box-854754"><a href="https://world-weather.info/forecast/usa/cincinnati/14days/">world-weather.info/forecast/usa/cincinnati/14days/</a><br /><a href="https://world-weather.info/">world-weather.info</a></p></div>
+                <Helmet><script async type="text/javascript" charset="utf-8" src="https://world-weather.info/wwinformer.php?userid=3fb7eb4b8c29bbe54ec5c070c0983fd1"></script>
+                </Helmet>
             </div>
         </div>
     );

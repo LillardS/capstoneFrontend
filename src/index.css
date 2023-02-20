@@ -408,8 +408,9 @@ header a:not(:last-child) {
 
 .attractions .attraction-details {
   background: var(--orange);
-  max-width: 30rem;
-  min-height: 55rem;
+  max-width: 20rem;
+  min-width: 20rem;
+  max-height: 55rem;
   padding: 2.5rem;
   margin: 5rem;
   border: .5rem solid black;
@@ -433,7 +434,8 @@ header a:not(:last-child) {
 .description {
   color: #000000;
   font-weight: bold;
-  max-width: 25rem;
+  max-width: 25em;
+  margin: auto;
 }
 
 /* attraction form */

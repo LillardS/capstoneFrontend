@@ -1,4 +1,6 @@
 const ActivityDetails = ({ activity }) => {
+
+
     return (
         <div className="attraction-details">
             <img src={activity.image} alt='the activity' />
@@ -10,6 +12,7 @@ const ActivityDetails = ({ activity }) => {
             </div>
             <p className="description">{activity.description}</p>
             <p className="createdAt">{activity.createdAt}</p>
+            {/* <span onClick={handleClick}>Delete</span> */}
         </div>
     )
 }
