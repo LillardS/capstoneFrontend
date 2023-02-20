@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useAttractionsContext } from "../hooks/useAttractionsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const AttractionForm = () => {
     const { dispatch } = useAttractionsContext();
+    const { user } = useAuthContext();
     const [ image, setImage ] = useState('');
     const [ title, setTitle ] = useState('');
     const [ hours, setHours ] = useState('');
@@ -13,15 +15,16 @@ const AttractionForm = () => {
     const [ rating, setRating ] = useState('');
     const [ error, setError ] = useState(null);
     const [ likes, setLikes ] = useState(0);
+    const [ userName, setUsername ] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const attraction = {image, title, hours, address, description, type, venue, rating, likes:0};
+        const attraction = {image, title, hours, address, description, type, venue, rating, likes:0, userName };
 
-        const response = await fetch('/Places', {
+        const response = await fetch('/Home', {
             method: 'POST',
-            body: JSON.stringify(attraction, { likes: likes }),
+            body: JSON.stringify(attraction, { likes: likes, userName: userName }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -42,6 +45,7 @@ const AttractionForm = () => {
             setDescription('');
             setError(null);
             setLikes(0);
+            setUsername(user.email);
             console.log('New Attraction Added', json);
             dispatch({type: 'CREATE_ATTRACTION', payload: json});
         }

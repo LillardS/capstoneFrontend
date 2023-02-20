@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 
 // create context for authorizing users
 export const AuthContext = createContext();
@@ -25,13 +25,15 @@ export const AuthContextProvider = ({ children }) => {
         user: null
     });
 
-    // useEffect(() => {
-    //     const user = JSON.parse(localStorage.getItem('user'));
+    // check for a user within the local storage
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
 
-    //     if (user) {
-    //         dispatch({ type: 'LOGIN', payload: user })
-    //     }
-    // }, []);
+        // if there is a user in the local storage already, log them in
+        if (user) {
+            dispatch({ type: 'LOGIN', payload: user })
+        }
+    }, []);
 
     // state of the authcontext in the console when context is provided
     console.log('AuthContext state:', state);

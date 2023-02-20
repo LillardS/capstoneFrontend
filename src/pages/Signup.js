@@ -28,7 +28,7 @@ const Signup = () => {
 
         {/* email input field */}
         <div className="email">
-        <label>Email address:</label>
+        <label className="email-label">Email address:</label>
         <input
           type="email"
 
@@ -40,7 +40,7 @@ const Signup = () => {
 
         {/* password input field */}
         <div className="password">
-        <label>Password:</label>
+        <label className="password-label">Password:</label>
         <input
           type="password"
 

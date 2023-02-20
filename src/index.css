@@ -480,6 +480,12 @@ nav button {
 
 .email {
   padding: .75rem;
+  flex-direction: row;
+}
+
+.signup-form .email-label {
+  display: flex;
+  justify-self: flex-start;
 }
 
 .password {

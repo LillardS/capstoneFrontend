@@ -4,6 +4,7 @@ import HomeActivities from "../components/HomeActivites";
 import HomePlaces from "../components/HomePlaces";
 import AttractionForm from "../components/AttractionForm";
 import { useAttractionsContext } from "../hooks/useAttractionsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { Helmet } from 'react-helmet';
 const _ = require('lodash');
 
@@ -11,6 +12,8 @@ const Home = () => {
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
+
+    const { user } = useAuthContext();
 
     const { attractions, dispatch } = useAttractionsContext();
 
@@ -25,16 +28,18 @@ const Home = () => {
             }
         }
         fetchAttractions();
-        
+
     }, [dispatch]);
 
     return (
         <div className="home">
             <h2 className="home-title"><a href="#places">Come to the Queen City and enjoy everything we have to offer!</a></h2>
-            <div className="container attraction-form">
-                <h3>Add a New Attraction!</h3>
-                <AttractionForm />
-            </div>
+            {user && (
+                <div className="container attraction-form">
+                    <h3>Add a New Attraction!</h3>
+                    <AttractionForm />
+                </div>
+            )}
             <div id="places" className="container places-home">
                 <h2 className="places-home-title">Places To Visit!</h2>
                 {attractions && _.shuffle(attractions.filter(attraction => attraction.type === 'place')).slice(0, 3).map((attraction) => (
