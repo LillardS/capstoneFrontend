@@ -26,13 +26,41 @@ header .container {
   margin: 0 auto;
   padding: 10px 20px;
   display: flex;
-  align-items: center;
+  text-align: center;
   justify-content: space-between;
+}
+
+header .container:first-child {
+  align-self: center;
+}
+
+header .container .user {
+  display: flex;
+  justify-content: space-between;
+}
+
+header .container .user a {
+  font-size: .75rem;
+}
+
+header .container .logout {
+  display: flex;
+  align-self: flex-end;
+}
+
+header .container .logout button {
+  cursor: pointer;
+}
+
+header .container .nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 header a {
   color: #ffffff;
-  font-size: .5rem;
+  font-size: 5pt;
   text-decoration: none;
   padding: 0 2.5rem;
 }
@@ -40,6 +68,19 @@ header a {
 header a:not(:last-child) {
   border-right: 1px solid black;
   box-sizing: border-box;
+}
+
+
+
+nav button {
+  color: white;
+  display: flex;
+  background: var(--orange);
+  width: 2.5rem;
+  margin: auto;
+  border-style:;
+  border: 2px dashed black;
+  border-radius: .75rem;
 }
 
 /* pages */
@@ -373,6 +414,93 @@ header a:not(:last-child) {
   font-weight: bolder;
   margin-bottom: 5rem;
   padding: 2.5rem;
+}
+
+/* login page */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--orange);
+  width: 25rem;
+  margin: auto;
+  margin-top: 1.5rem;
+  border-radius: .75rem;
+  padding: 2rem;
+}
+
+.login-form input {
+  border-radius: .75rem;
+}
+
+.email {
+  padding: .75rem;
+  display: flex;
+}
+
+.password {
+  padding: .75rem;
+  display: flex;
+}
+
+.login-button {
+  margin: .5rem;
+  color: white;
+  background: var(--orange);
+  width: 5rem;
+  margin: auto;
+  border-style:;
+  border: 2px dashed black;
+  border-radius: .75rem;
+  text-align: center;
+}
+
+.login-form h3 {
+  font-size: 1.75rem;
+}
+
+/* sign up page */
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--orange);
+  width: 25rem;
+  margin: auto;
+  margin-top: 1.5rem;
+  border-radius: .75rem;
+  padding: 2rem;
+}
+
+.signup-form input {
+  border-radius: .75rem;
+}
+
+.email {
+  padding: .75rem;
+}
+
+.password {
+  padding: .75rem;
+}
+
+.signup-button {
+  margin: .5rem;
+  margin: .5rem;
+  color: white;
+  background: var(--orange);
+  width: 5rem;
+  margin: auto;
+  border-style:;
+  border: 2px dashed black;
+  border-radius: .75rem;
+  text-align: center;
+}
+
+.signup-form h3 {
+  font-size: 1.75rem;
 }
 
 /* all attractions */
