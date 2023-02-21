@@ -3,7 +3,7 @@
 :root {
   --orange: #FB4F14;
   --primary: #1aac83;
-  --error: #e7195a;
+  --error: #b10000;
 }
 
 html,
@@ -450,7 +450,6 @@ nav button {
   background: var(--orange);
   width: 5rem;
   margin: auto;
-  border-style:;
   border: 2px dashed black;
   border-radius: .75rem;
   text-align: center;
@@ -499,7 +498,6 @@ nav button {
   background: var(--orange);
   width: 5rem;
   margin: auto;
-  border-style:;
   border: 2px dashed black;
   border-radius: .75rem;
   text-align: center;
@@ -550,6 +548,13 @@ nav button {
   border: .5rem solid black;
   border-radius: .75rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.attractions .attraction-details .likes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px;
 }
 
 .attractions .attraction-details img {
@@ -615,6 +620,10 @@ nav button {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+.create input.error {
+  border: 3px solid var(--error);
+}
+
 .create input:focus {
   outline: none;
 }
@@ -627,6 +636,10 @@ nav button {
   border-radius: .75rem;
   outline: none;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.create select.error {
+  border: 3px solid var(--error)
 }
 
 .create textarea {
@@ -642,19 +655,28 @@ nav button {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+.create textarea.error {
+  border: 3px solid var(--error)
+}
+
 .create button {
   color: white;
   background: var(--orange);
   width: 5rem;
   margin: auto;
-  border-style:;
   border: 2.5px dashed black;
   border-radius: .75rem;
 }
 
-.create .error {
+.create div.error {
   max-width: 25rem;
   margin-top: 1.1rem;
+  padding: 10px;
+  background: #ffffff;
+  color: var(--error);
+  border: 3px solid var(--error);
+  border-radius: .75rem;
+  margin: 20px auto;
 }
 
 /* header */
