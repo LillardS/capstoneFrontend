@@ -2,6 +2,7 @@ const HomeActivities = ({ activity }) => {
     return (
         <div className="activity-details">
             <img src={activity.image} alt='the activity' />
+            <h4>Likes:</h4>
             <div className="likes">{activity.likes}</div>
             <div className="detail-list">
                 <h4>{activity.title}</h4>

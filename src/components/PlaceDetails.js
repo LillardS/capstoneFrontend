@@ -76,14 +76,19 @@ const PlaceDetails = ({ place }) => {
     return (
         <div className="attraction-details">
             <img src={place.image} alt='the place' />
+            <h4>Likes:</h4>
             <div className='likes'>
-                <span onClick={like} className="material-symbols-outlined">
+                {user && (
+                <span onClick={() => {like(); like();}} className="material-symbols-outlined">
                     thumb_up
                 </span>
+                )}
                 <div className="likes">{place.likes}</div>
-                <span onClick={dislike} className="material-symbols-outlined">
+                {user && (
+                <span onClick={() => {dislike(); dislike();}} className="material-symbols-outlined">
                     thumb_down
                 </span>
+                )}
             </div>
             <div className="detail-list">
                 <h4>Name: {place.title}</h4>
@@ -92,7 +97,8 @@ const PlaceDetails = ({ place }) => {
             </div>
             <p className="description">{place.description}</p>
             <p className="createdAt">{formatDistanceToNow(new Date(place.createdAt), { addSuffix: true })}</p>
-            {user.email === place.userName && (
+            
+            {user && user.email === place.userName && (
                 <span className='material-symbols-outlined' onClick={handleClick}>delete</span>
             )}
         </div>

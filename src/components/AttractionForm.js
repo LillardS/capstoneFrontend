@@ -14,9 +14,9 @@ const AttractionForm = () => {
     const [ venue, setVenue ] = useState('');
     const [ rating, setRating ] = useState('');
     const [ error, setError ] = useState(null);
+    const [ success, setSuccess ] = useState('')
     const [ likes, setLikes ] = useState(0);
-    const [emptyFields, setEmptyFields] = useState([]);
-    const [ userName, setUsername ] = useState('');
+    const [ userName, setUsername ] = useState(user.email);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,7 +37,6 @@ const AttractionForm = () => {
 
         if(!response.ok) {
             setError(json.error);
-            setEmptyFields(json.emptyFields)
         }
         if(response.ok) {
             setImage('');
@@ -51,7 +50,7 @@ const AttractionForm = () => {
             setError(null);
             setLikes(0);
             setUsername('');
-            setEmptyFields([]);
+            setSuccess('New Attraction Added!');
             console.log('New Attraction Added', json);
             dispatch({type: 'CREATE_ATTRACTION', payload: json});
         }
@@ -60,35 +59,36 @@ const AttractionForm = () => {
     return (
         <form id="attraction" className="create" onSubmit={handleSubmit}>
             <label>Attraction Image(url):</label>
-            <input className={emptyFields.includes('image') ? 'error' : ''}  type='url' onChange={(e) => setImage(e.target.value)} value={image} />
+            <input  type='url' onChange={(e) => setImage(e.target.value)} value={image} />
             <label>Attraction Title:</label>
-            <input className={emptyFields.includes('title') ? 'error' : ''}  type='text' onChange={(e) => setTitle(e.target.value)} value={title} />
+            <input  type='text' onChange={(e) => setTitle(e.target.value)} value={title} />
             <label>Attraction Hours:</label>
-            <input className={emptyFields.includes('hours') ? 'error' : ''} type='text' onChange={(e) => setHours(e.target.value)} value={hours} />
+            <input type='text' onChange={(e) => setHours(e.target.value)} value={hours} />
             <label>Attraction Address:</label>
-            <input className={emptyFields.includes('address') ? 'error' : ''} type='text' onChange={(e) => setAddress(e.target.value)} value={address} />
+            <input type='text' onChange={(e) => setAddress(e.target.value)} value={address} />
             <label>Attraction Type:</label>
-            <select className={emptyFields.includes('type') ? 'error' : ''} form_id="attraction" name="type" onChange={(e) => setType(e.target.value)} value={type}>
+            <select form_id="attraction" name="type" onChange={(e) => setType(e.target.value)} value={type}>
                 <option value="">---</option>
                 <option value="place">Place</option>
                 <option value="activity">Activity</option>
             </select>
             <label>Attraction Venue:</label>
-            <select className={emptyFields.includes('venue') ? 'error' : ''} form_id="attraction" name="venue" onChange={(e) => setVenue(e.target.value)} value={venue}>
+            <select form_id="attraction" name="venue" onChange={(e) => setVenue(e.target.value)} value={venue}>
                 <option value="">---</option>
                 <option value="inside">Inside</option>
                 <option value="outside">Outside</option>
             </select>
             <label>Attraction Rating:</label>
-            <select className={emptyFields.includes('rating') ? 'error' : ''} form_id="attraction" name="rating" onChange={(e) => setRating(e.target.value)} value={rating}>
+            <select form_id="attraction" name="rating" onChange={(e) => setRating(e.target.value)} value={rating}>
                 <option value=''>---</option>
                 <option value="family-friendly">Family-Friendly</option>
                 <option value="adult">Adult</option>
             </select>
             <label>Attraction Description</label>
-            <textarea className={emptyFields.includes('description') ? 'error' : ''} form_id="attraction" onChange={(e) => setDescription(e.target.value)} value={description} />
+            <textarea form_id="attraction" onChange={(e) => setDescription(e.target.value)} value={description} />
             <button>Add Attraction</button>
             {error && <div className="error">{error}</div>}
+            {success && <div className="success">{success}</div>}
         </form>
     );
 }

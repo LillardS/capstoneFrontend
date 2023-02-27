@@ -1,39 +1,76 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HomeActivities from "../components/HomeActivites";
 import HomePlaces from "../components/HomePlaces";
 import AttractionForm from "../components/AttractionForm";
+import Weather from "../components/Weather";
 import { useAttractionsContext } from "../hooks/useAttractionsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Helmet } from 'react-helmet';
 const _ = require('lodash');
 
 const Home = () => {
+    
+    // scrolls the page to the top upon reaching the home page
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     });
 
+    // allows the use of the auth context on the home page
     const { user } = useAuthContext();
 
+    // allows the use of attractions on the home page
     const { attractions, dispatch } = useAttractionsContext();
 
-    useEffect(() => {
+    // sets the weather for the weather component
+    const [ weather, setWeather ] = useState();
 
+    
+    useEffect(() => {
+        
+        // Fetches and sets all attractions for the home page
         const fetchAttractions = async () => {
             const response = await fetch('/Home');
             const json = await response.json();
-
+            
+            // if fetched data is okay, set the data as attractions
             if (response.ok) {
                 dispatch({ type: 'SET_ATTRACTIONS', payload: json })
             }
         }
+        
+        // calls the function to fetch and set attractions
         fetchAttractions();
-
+        
     }, [dispatch]);
+    
+    useEffect(() => {
+
+        // function to fetch the weather from open weather map
+        const fetchWeather = async () => {
+            const weatherResponse = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Cincinnati&units=imperial&APPID=8456df1c9a83bf9fd7f76496b84ac3b8')
+            const weatherJson = await weatherResponse.json();
+
+            // if the response is okay, set the data as weather
+            if (weatherResponse.ok) {
+                setWeather(weatherJson);
+            }
+            if (!weatherResponse.ok) {
+                console.log("Error getting weather");
+            }
+        }
+
+        // calls the function to fetch and set the weather
+        fetchWeather();
+    }, []);
 
     return (
         <div className="home">
             <h2 className="home-title"><a href="#places">Come to the Queen City and enjoy everything we have to offer!</a></h2>
+            {weather && (
+            <div className="weather-widget">
+                <Weather weather={weather}/>
+            </div>
+            )}
             {user && (
                 <div className="container attraction-form">
                     <h3>Add a New Attraction!</h3>
@@ -61,11 +98,6 @@ const Home = () => {
             <div className="container contacts-home">
                 <h2>Get In Contact!</h2>
                 <Link to="/Contacts"><h2 className="container-details">Get in contact with me and see other projects I've worked on!</h2></Link>
-            </div>
-            <div className="weather-widget">
-                <div id="3fb7eb4b8c29bbe54ec5c070c0983fd1" className="ww-informers-box-854753"><p className="ww-informers-box-854754"><a href="https://world-weather.info/forecast/usa/cincinnati/14days/">world-weather.info/forecast/usa/cincinnati/14days/</a><br /><a href="https://world-weather.info/">world-weather.info</a></p></div>
-                <Helmet><script async type="text/javascript" charset="utf-8" src="https://world-weather.info/wwinformer.php?userid=3fb7eb4b8c29bbe54ec5c070c0983fd1"></script>
-                </Helmet>
             </div>
         </div>
     );

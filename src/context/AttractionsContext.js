@@ -22,7 +22,7 @@ export const attractionsReducer = (state, action) => {
             }
         case 'UPDATE_ATTRACTION':
             return {
-                attractions: [action.payload, ...state.attractions]
+                attractions: [action.payload, ...state.attractions.filter((a) => a._id !== action.payload._id)]
             }
         default:
             return state;

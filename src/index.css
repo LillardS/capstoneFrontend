@@ -11,6 +11,7 @@ body {
   background: #f1f1f1;
   min-height: 100%;
   margin: 0;
+  width: 100%;
   font-family: 'Courier New', Courier, monospace;
   scroll-behavior: smooth;
 }
@@ -19,43 +20,56 @@ body {
 
 header {
   background: var(--orange);
-}
-
-header .container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  display: flex;
-  text-align: center;
-  justify-content: space-between;
-}
-
-header .container:first-child {
-  align-self: center;
-}
-
-header .container .user {
-  display: flex;
-  justify-content: space-between;
-}
-
-header .container .user a {
-  font-size: .75rem;
-}
-
-header .container .logout {
-  display: flex;
-  align-self: flex-end;
-}
-
-header .container .logout button {
-  cursor: pointer;
-}
-
-header .container .nav {
+  padding: .25rem .25rem;
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
+}
+
+header .user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+header .user a {
+  font-size: .95rem;
+  color: #000000;
+  font-weight: bolder;
+}
+
+header .logout {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-weight: bolder;
+}
+
+header .logout button {
+  cursor: pointer;
+  margin: .25rem;
+  color: white;
+  display: flex;
+  background: var(--orange);
+  width: 2.5rem;
+  border: 2px dashed black;
+  border-radius: .75rem;
+}
+
+header .nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+header .user-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 5px;
 }
 
 header a {
@@ -70,8 +84,6 @@ header a:not(:last-child) {
   box-sizing: border-box;
 }
 
-
-
 nav button {
   color: white;
   display: flex;
@@ -81,6 +93,16 @@ nav button {
   border-style:;
   border: 2px dashed black;
   border-radius: .75rem;
+}
+
+/* filter */
+
+.filter select {
+  background: var(--orange);
+  color: #ffffff;
+  border-radius: .75rem;
+  font-size: 1.2rem;
+  padding: 5px;
 }
 
 /* pages */
@@ -157,12 +179,23 @@ nav button {
   text-decoration: underline;
 }
 
+/* weathe widget on the home page */
+
+.weather-widget {
+  margin-top: 10rem;
+}
+
 /* places section on the home page */
 
 .places-home {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  font-weight: bolder;
+}
+
+.places-home h4 {
+  color: #ffffff;
 }
 
 .places-home h2 {
@@ -210,6 +243,11 @@ nav button {
 
 .activities-home {
   text-align: center;
+  font-weight: bolder;
+}
+
+.activities-home h4 {
+  color: #ffffff;
 }
 
 .activities-home h2 {
@@ -300,7 +338,6 @@ nav button {
   max-width: 1200px;
   font-weight: bolder;
   margin: 2.5rem;
-  padding: 2.5rem;
 }
 
 .about-title a {
@@ -325,7 +362,6 @@ nav button {
 
 .about-header {
   margin: 2.5rem;
-  padding: 2.5rem;
 }
 
 .about-list ul {
@@ -365,7 +401,6 @@ nav button {
   max-width: 1200px;
   font-weight: bolder;
   margin: 2.5rem;
-  padding: 2.5rem;
 }
 
 .contacts-title a {
@@ -409,6 +444,17 @@ nav button {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+.contacts-list li a {
+  text-decoration: none;
+  color: #000000;
+  transition: .5s;
+}
+
+.contacts-list li a:hover{
+  font-size: 1.5rem;
+  text-decoration: underline;
+}
+
 .contacts-closer {
   max-width: 1200px;
   font-weight: bolder;
@@ -437,16 +483,19 @@ nav button {
 .email {
   padding: .75rem;
   display: flex;
+  font-weight: bolder;
 }
 
 .password {
   padding: .75rem;
   display: flex;
+  font-weight: bolder;
 }
 
 .login-button {
   margin: .5rem;
   color: white;
+  font-weight: bolder;
   background: var(--orange);
   width: 5rem;
   margin: auto;
@@ -457,6 +506,13 @@ nav button {
 
 .login-form h3 {
   font-size: 1.75rem;
+  color: #ffffff;
+}
+
+.login-form .error {
+  margin-top: 1rem;
+  color: #ffffff;
+  font-weight: bolder;
 }
 
 /* sign up page */
@@ -495,6 +551,7 @@ nav button {
   margin: .5rem;
   margin: .5rem;
   color: white;
+  font-weight: bolder;
   background: var(--orange);
   width: 5rem;
   margin: auto;
@@ -505,6 +562,13 @@ nav button {
 
 .signup-form h3 {
   font-size: 1.75rem;
+  color: #ffffff;
+}
+
+.signup-form .error {
+  margin-top: 1rem;
+  color: #ffffff;
+  font-weight: bolder;
 }
 
 /* all attractions */
@@ -517,12 +581,11 @@ nav button {
 }
 
 .attraction-head {
-  margin: 2.5rem;
-  padding: 2.5rem;
+  margin: 3rem;
 }
 
 .attraction-head a {
-  padding: 2.5rem;
+  padding: 2rem;
   margin: 2.5rem;
   text-decoration: none;
   color: black;
@@ -542,7 +605,7 @@ nav button {
   background: var(--orange);
   max-width: 20rem;
   min-width: 20rem;
-  max-height: 55rem;
+  max-height: 60rem;
   padding: 2.5rem;
   margin: 5rem;
   border: .5rem solid black;
@@ -550,11 +613,15 @@ nav button {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+.attractions .attraction-details h4 {
+  color: #ffffff;
+}
+
 .attractions .attraction-details .likes {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 5px;
+  font-weight: bolder;
 }
 
 .attractions .attraction-details img {
@@ -679,6 +746,66 @@ nav button {
   margin: 20px auto;
 }
 
+.create div.success {
+  max-width: 25rem;
+  margin-top: 1.1rem;
+  padding: 10px;
+  background: #ffffff;
+  color: var(--primary);
+  border: 3px solid var(--primary);
+  border-radius: .75rem;
+  margin: 20px auto;
+}
+
+/* weather component */
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  background: var(--orange);
+  padding: 1.2rem;
+  column-gap: 1.05rem;
+  font-weight: bolder;
+  border-radius: .75rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.weather .header {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.weather .information {
+  display: flex;
+  column-gap: 5px;
+}
+
+.head-info {
+  font-size: 1.2rem;
+  color: white;
+  border: 5px black solid;
+  background: var(--orange);
+  border-radius: .75rem;
+  padding: 5px;
+}
+
+.side-info {
+  font-size: 1.2rem;
+  border: 5px black solid;
+  border-radius: .75rem;
+  color: white;
+  background: var(--orange);
+  padding: 5px;
+}
+
+.closer {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+
 /* header */
 
 .title-image {
@@ -698,6 +825,7 @@ nav button {
   align-items: center;
   justify-content: space-evenly;
   font-size: 2.5rem;
+  margin-left: 1rem;
 }
 
 /* footer */

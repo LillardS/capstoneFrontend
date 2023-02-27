@@ -17,24 +17,24 @@ const Navbar = () => {
 
     return (
         <header>
-            <div id="top" className="container">
-                <div className='nav'>
-                    <Link to="/Home">
-                        <h1>Home</h1>
-                    </Link>
-                    <Link to="/Places">
-                        <h1>Places To Visit</h1>
-                    </Link>
-                    <Link to="/Activities">
-                        <h1>Activities To Do</h1>
-                    </Link>
-                    <Link to="/About">
-                        <h1>About</h1>
-                    </Link>
-                    <Link className='contactsLink' to="/Contacts">
-                        <h1>Contacts</h1>
-                    </Link>
-                </div>
+            <div className='nav'>
+                <Link to="/Home">
+                    <h1>Home</h1>
+                </Link>
+                <Link to="/Places">
+                    <h1>Places To Visit</h1>
+                </Link>
+                <Link to="/Activities">
+                    <h1>Activities To Do</h1>
+                </Link>
+                <Link to="/About">
+                    <h1>About</h1>
+                </Link>
+                <Link className='contactsLink' to="/Contacts">
+                    <h1>Contacts</h1>
+                </Link>
+            </div>
+            <div className='user-display'>
                 <nav>
                     {user && (
                         <div className='logout'>
