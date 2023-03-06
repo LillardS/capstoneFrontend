@@ -1,19 +1,15 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HomeActivities from "../components/HomeActivites";
 import HomePlaces from "../components/HomePlaces";
 import AttractionForm from "../components/AttractionForm";
 import Weather from "../components/Weather";
+import Flights from "../components/Flights";
 import { useAttractionsContext } from "../hooks/useAttractionsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 const _ = require('lodash');
 
 const Home = () => {
-    
-    // scrolls the page to the top upon reaching the home page
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
 
     // allows the use of the auth context on the home page
     const { user } = useAuthContext();
@@ -22,27 +18,50 @@ const Home = () => {
     const { attractions, dispatch } = useAttractionsContext();
 
     // sets the weather for the weather component
-    const [ weather, setWeather ] = useState();
+    const [weather, setWeather] = useState();
 
-    
+    const [flights, setFlights] = useState();
+
     useEffect(() => {
-        
+
         // Fetches and sets all attractions for the home page
         const fetchAttractions = async () => {
             const response = await fetch('/Home');
             const json = await response.json();
-            
+
             // if fetched data is okay, set the data as attractions
             if (response.ok) {
                 dispatch({ type: 'SET_ATTRACTIONS', payload: json })
             }
         }
-        
+
         // calls the function to fetch and set attractions
         fetchAttractions();
-        
+
     }, [dispatch]);
-    
+
+    useEffect(() => {
+
+        // fetches and sets flight data for flights to cincinnati
+        const fetchFlights = async () => {
+
+            // fetch call to the data website, then setting the state of flights to the flight data for arrivals
+            fetch(`https://travelimpactmodel.googleapis.com/v1/flights:computeFlightEmissions?key=$AIzaSyBHCmTzt7LF9ydACWIDxCkd7L7rViQAi-4`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                body: {}
+            })
+                .then(response => response.json())
+                .then(response => setFlights(response))
+                .catch(err => console.error(err));
+        }
+
+        console.log(flights);
+
+        // calls the function that fetches the flight data
+        fetchFlights();
+    }, [flights]);
+
     useEffect(() => {
 
         // function to fetch the weather from open weather map
@@ -63,20 +82,56 @@ const Home = () => {
         fetchWeather();
     }, []);
 
+    // html returned for the /Home page
     return (
         <div className="home">
             <h2 className="home-title"><a href="#places">Come to the Queen City and enjoy everything we have to offer!</a></h2>
-            {weather && (
-            <div className="weather-widget">
-                <Weather weather={weather}/>
+
+            {/* displays both the weather and flight widget */}
+            <div className="widgets">
+                {weather && (
+                    <div className="weather-widget">
+                        <Weather weather={weather} />
+                    </div>
+                )}
+
+                <div className="home-flights">
+                    <div className="flights-home">
+                        <div className="departure-airport">
+                            <p>Airport:</p>
+                        </div>
+                        <div className="departure-airline">
+                            <p>Airline:</p>
+                        </div>
+                        <div className="flight-number">
+                            <p>Flight Number:</p>
+                        </div>
+                        <div className="departure-time">
+                            <p>Departure Date:</p>
+                            <p>Departure Time:</p>
+                        </div>
+                        <div className="arrival-time">
+                            <p>Arrival Date:</p>
+                            <p>Arrival Time:</p>
+                        </div>
+                    </div>
+                    {flights && _.shuffle(flights).slice(0, 3).map((flight) => (
+                        <div className="flights-widget">
+                            <Flights key={flight.number} flight={flight} />
+                        </div>
+                    ))}
+                </div>
             </div>
-            )}
+
+            {/* if a user is logged in, show them the attraction form */}
             {user && (
                 <div className="container attraction-form">
                     <h3>Add a New Attraction!</h3>
                     <AttractionForm />
                 </div>
             )}
+
+            {/* only show 3 random places on the home page out of the array of attractions */}
             <div id="places" className="container places-home">
                 <h2 className="places-home-title">Places To Visit!</h2>
                 {attractions && _.shuffle(attractions.filter(attraction => attraction.type === 'place')).slice(0, 3).map((attraction) => (
@@ -84,6 +139,8 @@ const Home = () => {
                 ))}
                 <Link to="/Places"><h2>View some of the amazing places we have to offer!</h2></Link>
             </div>
+
+            {/* only show 3 random activities on the home page out of the array of attractions */}
             <div className="container activities-home">
                 <h2>Fun Activities To Do!</h2>
                 {attractions && _.shuffle(attractions.filter(attraction => attraction.type === 'activity')).slice(0, 3).map((attraction) => (
@@ -91,10 +148,14 @@ const Home = () => {
                 ))}
                 <Link to="/Activities"><h2>View some of the exciting and adventurous activities we have to offer!</h2></Link>
             </div>
+
+            {/* link to the /About page from the ome page */}
             <div className="container about-home">
                 <h2>About Us!</h2>
                 <Link to="/About"><h2 className="container-details">See some fun facts to inspire others and see what our great city has to offer!</h2></Link>
             </div>
+
+            {/* link to the /Contact page from the /Home page */}
             <div className="container contacts-home">
                 <h2>Get In Contact!</h2>
                 <Link to="/Contacts"><h2 className="container-details">Get in contact with me and see other projects I've worked on!</h2></Link>

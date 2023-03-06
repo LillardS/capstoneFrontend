@@ -73,11 +73,13 @@ export const ActivityDetails = ({ activity }) => {
                 }
     }
 
+    // html being returned for each activity in the array of attractions fetched at the home page
     return (
         <div className="attraction-details">
             <img src={activity.image} alt='the activity' />
             <h4>Likes:</h4>
             <div className='likes'>
+            {/* if there is a user, display the like and dislike buttons */}
                 {user && (
                 <span onClick={() => {like(); like();}} className="material-symbols-outlined">
                     thumb_up
@@ -98,6 +100,7 @@ export const ActivityDetails = ({ activity }) => {
             <p className="description">{activity.description}</p>
             <p className="createdAt">{formatDistanceToNow(new Date(activity.createdAt), { addSuffix: true })}</p>
 
+            {/* If the current user's email matches the email used to create the attraction, show the delete button */}
             {user && user.email === activity.userName && (
                 <span className='material-symbols-outlined' onClick={handleClick}>delete</span>
             )}

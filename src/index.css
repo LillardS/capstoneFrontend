@@ -738,9 +738,11 @@ nav button {
 .create div.error {
   max-width: 25rem;
   margin-top: 1.1rem;
+  height: auto;
   padding: 10px;
   background: #ffffff;
   color: var(--error);
+  text-align: center;
   border: 3px solid var(--error);
   border-radius: .75rem;
   margin: 20px auto;
@@ -755,6 +757,14 @@ nav button {
   border: 3px solid var(--primary);
   border-radius: .75rem;
   margin: 20px auto;
+}
+
+/* widgets */
+
+.widgets {
+  display: flex;
+  align-items: center;
+  column-gap: 1.05rem;
 }
 
 /* weather component */
@@ -803,6 +813,56 @@ nav button {
   text-align: center;
   margin-top: 10px;
   font-size: 1.1rem;
+  font-weight: bolder;
+}
+
+/* flight component */
+
+.home-flights {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  background: var(--orange);
+  padding: 1.2rem;
+  column-gap: 1.05rem;
+  font-weight: bolder;
+  border-radius: .75rem;
+  margin-top: 9.5rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.flights {
+  color: #ffffff;
+  border: 5px solid black;
+  padding: 5px;
+  border-radius: .75rem;
+  font-size: 1.2rem;
+}
+
+.flights-home {
+  color: #000000;
+  border: 5px solid black;
+  padding: 5px;
+  border-radius: .75rem;
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
+.departure-airport {
+  font-weight: bolder;
+}
+
+.departure-airline {
+  font-weight: bolder;
+}
+
+.depature-time {
+  display: flex;
+  flex-direction: column;
+  font-weight: bolder;
+}
+
+.arrival-time {
   font-weight: bolder;
 }
 

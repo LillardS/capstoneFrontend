@@ -17,6 +17,7 @@ const Login = () => {
     await login(email, password);
   }
 
+  // html returned for the login page
   return (
     <div className="login">
       <form className="login-form" onSubmit={handleSubmit}>

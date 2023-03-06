@@ -1,4 +1,6 @@
 const Header = () => {
+
+    // the html for the header on each page
     return (
         <div className="title-image">
             <div className="title-text">

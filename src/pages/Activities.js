@@ -5,11 +5,14 @@ import { useAttractionsContext } from '../hooks/useAttractionsContext';
 import ActivityDetails from '../components/ActivityDetails';
 
 const Activities = () => {
+
+    // set the attractions equal to the ones fetched for the attraction context, and set the filter to be empty to start
     const { attractions, dispatch } = useAttractionsContext();
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
 
+        // on load fetch all attractions and set them for the attraction context.
         const fetchAttractions = async () => {
             const response = await fetch('/Activities');
             const json = await response.json();
@@ -19,11 +22,12 @@ const Activities = () => {
             }
         }
 
+        // call the function that fetches and sets the attractions
         fetchAttractions();
 
     }, [dispatch]);
-
-    console.log();
+    
+    // if there is a filter active, display only the filtered activities
     if (filter) {
         return (
             <div className="attractions">
@@ -50,6 +54,8 @@ const Activities = () => {
             </div>
         );
     }
+
+    // if there is no value for filter, display all activities
     return (
         <div className="attractions">
             <div className='attraction-head'>

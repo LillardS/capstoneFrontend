@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuthContext } from './hooks/useAuthContext';
 
 // pages and components
 import Home from './pages/Home';
@@ -14,43 +15,61 @@ import Header from './components/Header';
 
 
 function App() {
+  // sets the user to the user in the AuthContext
+  const { user } = useAuthContext();
+
+  // html displayed on the index.html for the website, using components and routes
   return (
     <div className="App">
       <BrowserRouter>
-      <Navbar />
-      <Header />
+
+        {/* nav and header displayed on every page */}
+        <Navbar />
+        <Header />
+
+        {/* displays different components depending on what page you are on */}
         <div className='pages'>
           <Routes>
-            <Route 
+            <Route
+              path='/'
+              element={<Navigate to="/Home" />}
+            />
+            <Route
               path='/Home'
               element={<Home />}
             />
-            <Route 
+            <Route
               path='/Places'
               element={<Places />}
             />
-            <Route 
+            <Route
               path='/Activities'
               element={<Activities />}
             />
-            <Route 
+            <Route
               path='/About'
               element={<About />}
             />
-            <Route 
+            <Route
               path='/Contacts'
               element={<Contacts />}
             />
-            <Route 
+
+            {/* If there is no user, show the /Login page. If you login (update the state with a user), navigate to the /Home page */}
+            <Route
               path='user/Login'
-              element={<Login />}
+              element={!user ? <Login /> : <Navigate to="/Home" />}
             />
-            <Route 
+
+            {/* If there is no user, show the /Signup page. If you signup (update the state with a user), navigate to the /Home page */}
+            <Route
               path='user/Signup'
-              element={<Signup />}
+              element={!user ? <Signup /> : <Navigate to="/Home" />}
             />
           </Routes>
         </div>
+
+        {/* footer displayed on every page */}
         <Footer />
       </BrowserRouter>
     </div>

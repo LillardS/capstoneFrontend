@@ -73,21 +73,24 @@ const PlaceDetails = ({ place }) => {
         }
     }
 
+    // html being returned for each place in the array of attractions fetched at the home page
     return (
         <div className="attraction-details">
             <img src={place.image} alt='the place' />
             <h4>Likes:</h4>
             <div className='likes'>
+
+                {/* if there is a user logged in, display the like and dislike button */}
                 {user && (
-                <span onClick={() => {like(); like();}} className="material-symbols-outlined">
-                    thumb_up
-                </span>
+                    <span onClick={() => { like(); like(); }} className="material-symbols-outlined">
+                        thumb_up
+                    </span>
                 )}
                 <div className="likes">{place.likes}</div>
                 {user && (
-                <span onClick={() => {dislike(); dislike();}} className="material-symbols-outlined">
-                    thumb_down
-                </span>
+                    <span onClick={() => { dislike(); dislike(); }} className="material-symbols-outlined">
+                        thumb_down
+                    </span>
                 )}
             </div>
             <div className="detail-list">
@@ -97,7 +100,8 @@ const PlaceDetails = ({ place }) => {
             </div>
             <p className="description">{place.description}</p>
             <p className="createdAt">{formatDistanceToNow(new Date(place.createdAt), { addSuffix: true })}</p>
-            
+
+            {/* If the current user's email matches the email used to create the attraction, show the delete button */}
             {user && user.email === place.userName && (
                 <span className='material-symbols-outlined' onClick={handleClick}>delete</span>
             )}

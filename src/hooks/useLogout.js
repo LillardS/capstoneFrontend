@@ -14,5 +14,6 @@ export const useLogout = () => {
         dispatch({ type: 'LOGOUT' });
     }
 
+    // can be taken from this hook
     return { logout }
 }

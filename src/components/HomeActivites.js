@@ -1,4 +1,6 @@
 const HomeActivities = ({ activity }) => {
+
+    // an altered version of the activities card with less displayed information for the homepage
     return (
         <div className="activity-details">
             <img src={activity.image} alt='the activity' />

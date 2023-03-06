@@ -1,4 +1,6 @@
 const HomePlaces = ({ place }) => {
+
+        // an altered version of the places card with less displayed information for the homepage
     return (
         <div className="places-details">
             <img src={place.image} alt='the places' />

@@ -1,5 +1,6 @@
 const Weather = ({ weather }) => {
 
+    // html returned for the weather widget, using the data fetched on the home page
     return (
         <div className='weather'>
             <div className="header">

@@ -3,6 +3,8 @@ import { useAttractionsContext } from "../hooks/useAttractionsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const AttractionForm = () => {
+
+    // inital state of all input/select/text area field data, as well as context for the user and the dispatch action needed to create an attraction
     const { dispatch } = useAttractionsContext();
     const { user } = useAuthContext();
     const [ image, setImage ] = useState('');
@@ -16,8 +18,11 @@ const AttractionForm = () => {
     const [ error, setError ] = useState(null);
     const [ success, setSuccess ] = useState('')
     const [ likes, setLikes ] = useState(0);
+    const [ emptyFields, setemptyFields ] = useState([]);
     const [ userName, setUsername ] = useState(user.email);
 
+
+    // on submit, prevent refresh of the page, set the attraction userName to the email of the user creating it, then attempt to post a new attraction with all the filled in data.
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -35,9 +40,14 @@ const AttractionForm = () => {
 
         const json = await response.json();
 
+
+        // if the response is not okay (the attraction can not be created), set and display the error and the empty fields needing filling
         if(!response.ok) {
             setError(json.error);
+            setemptyFields(json.emptyFields)
         }
+
+        // if the response is okay (the attraction can be created), set the empty fields back to their inital state, then dispatch the create attraction action.
         if(response.ok) {
             setImage('');
             setTitle('');
@@ -48,6 +58,7 @@ const AttractionForm = () => {
             setRating('');
             setDescription('');
             setError(null);
+            setemptyFields([]);
             setLikes(0);
             setUsername('');
             setSuccess('New Attraction Added!');
@@ -56,36 +67,37 @@ const AttractionForm = () => {
         }
     }
 
+    // the html returned to view the form
     return (
         <form id="attraction" className="create" onSubmit={handleSubmit}>
             <label>Attraction Image(url):</label>
-            <input  type='url' onChange={(e) => setImage(e.target.value)} value={image} />
+            <input className={emptyFields.includes('image') ? 'error' : ''} type='url' onChange={(e) => setImage(e.target.value)} value={image} />
             <label>Attraction Title:</label>
-            <input  type='text' onChange={(e) => setTitle(e.target.value)} value={title} />
+            <input className={emptyFields.includes('title') ? 'error' : ''} type='text' onChange={(e) => setTitle(e.target.value)} value={title} />
             <label>Attraction Hours:</label>
-            <input type='text' onChange={(e) => setHours(e.target.value)} value={hours} />
+            <input className={emptyFields.includes('hours') ? 'error' : ''} type='text' onChange={(e) => setHours(e.target.value)} value={hours} />
             <label>Attraction Address:</label>
-            <input type='text' onChange={(e) => setAddress(e.target.value)} value={address} />
+            <input className={emptyFields.includes('address') ? 'error' : ''} type='text' onChange={(e) => setAddress(e.target.value)} value={address} />
             <label>Attraction Type:</label>
-            <select form_id="attraction" name="type" onChange={(e) => setType(e.target.value)} value={type}>
+            <select className={emptyFields.includes('type') ? 'error' : ''} form_id="attraction" name="type" onChange={(e) => setType(e.target.value)} value={type}>
                 <option value="">---</option>
                 <option value="place">Place</option>
                 <option value="activity">Activity</option>
             </select>
             <label>Attraction Venue:</label>
-            <select form_id="attraction" name="venue" onChange={(e) => setVenue(e.target.value)} value={venue}>
+            <select className={emptyFields.includes('venue') ? 'error' : ''} form_id="attraction" name="venue" onChange={(e) => setVenue(e.target.value)} value={venue}>
                 <option value="">---</option>
                 <option value="inside">Inside</option>
                 <option value="outside">Outside</option>
             </select>
             <label>Attraction Rating:</label>
-            <select form_id="attraction" name="rating" onChange={(e) => setRating(e.target.value)} value={rating}>
+            <select className={emptyFields.includes('rating') ? 'error' : ''} form_id="attraction" name="rating" onChange={(e) => setRating(e.target.value)} value={rating}>
                 <option value=''>---</option>
                 <option value="family-friendly">Family-Friendly</option>
                 <option value="adult">Adult</option>
             </select>
             <label>Attraction Description</label>
-            <textarea form_id="attraction" onChange={(e) => setDescription(e.target.value)} value={description} />
+            <textarea className={emptyFields.includes('description') ? 'error' : ''} form_id="attraction" onChange={(e) => setDescription(e.target.value)} value={description} />
             <button>Add Attraction</button>
             {error && <div className="error">{error}</div>}
             {success && <div className="success">{success}</div>}

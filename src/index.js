@@ -5,8 +5,10 @@ import App from './App';
 import { AttractionsContextProvider } from './context/AttractionsContext';
 import { AuthContextProvider } from './context/AuthContext';
 
-// displays inside the root div on index.html
+// renders the app component inside the root div on index.html
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// wraps the whole app in AuthContextProvider, and AttractionContextProvider, so that they may be used across the whole app
 root.render(
   <React.StrictMode>
     <AuthContextProvider>

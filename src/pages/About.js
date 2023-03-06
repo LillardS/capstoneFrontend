@@ -1,9 +1,13 @@
 import { useLayoutEffect } from "react";
 
 const About = () => {
+
+    // when the page first loads, scroll to the top of the page
     useLayoutEffect(() => {
         window.scrollTo(0,0);
     });
+
+    // html returned when on /About page
     return (
         <div className="about">
             <div className="about-title">

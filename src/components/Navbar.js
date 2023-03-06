@@ -17,6 +17,7 @@ const Navbar = () => {
 
     return (
         <header>
+            {/* links to navigate the website on the navbar */}
             <div className='nav'>
                 <Link to="/Home">
                     <h1>Home</h1>
@@ -36,12 +37,15 @@ const Navbar = () => {
             </div>
             <div className='user-display'>
                 <nav>
+                    {/* if there is a user logged in, display their username and the log out button on the navbar */}
                     {user && (
                         <div className='logout'>
                             <span className='username'>{user.email}</span>
                             <button onClick={handleClick}>Log Out</button>
                         </div>
                     )}
+
+                    {/* if there is not a user logged in, display the login and signup buttons on the navbar */}
                     {!user && (
                         <div className='user'>
                             <Link to="/user/Login">Login</Link>

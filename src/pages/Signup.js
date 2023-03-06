@@ -15,12 +15,9 @@ const Signup = () => {
 
     // signs a new user up with inputs from the form
     await signup(email, password);
-
-    // // clears the form
-    // setEmail('');
-    // setPassword('');
   }
 
+  // html returned for the signup page
   return (
     <div className="signup">
       <form className="signup-form" onSubmit={handleSubmit}>

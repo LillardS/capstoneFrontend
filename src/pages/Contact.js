@@ -1,9 +1,13 @@
 import { useLayoutEffect } from "react";
 
 const Contacts = () => {
+
+    // on page load, scroll to the top of the page
     useLayoutEffect(() => {
         window.scrollTo(0,0);
     });
+
+    // html returned on the /Contacts page
     return (
         <div className="contacts">
         <div className="contacts-title">
