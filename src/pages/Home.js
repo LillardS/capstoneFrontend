@@ -4,7 +4,6 @@ import HomeActivities from "../components/HomeActivites";
 import HomePlaces from "../components/HomePlaces";
 import AttractionForm from "../components/AttractionForm";
 import Weather from "../components/Weather";
-import Flights from "../components/Flights";
 import { useAttractionsContext } from "../hooks/useAttractionsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 const _ = require('lodash');
@@ -19,8 +18,6 @@ const Home = () => {
 
     // sets the weather for the weather component
     const [weather, setWeather] = useState();
-
-    const [flights, setFlights] = useState();
 
     useEffect(() => {
 
@@ -39,28 +36,6 @@ const Home = () => {
         fetchAttractions();
 
     }, [dispatch]);
-
-    useEffect(() => {
-
-        // fetches and sets flight data for flights to cincinnati
-        const fetchFlights = async () => {
-
-            // fetch call to the data website, then setting the state of flights to the flight data for arrivals
-            fetch(`https://travelimpactmodel.googleapis.com/v1/flights:computeFlightEmissions?key=$AIzaSyBHCmTzt7LF9ydACWIDxCkd7L7rViQAi-4`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                body: {}
-            })
-                .then(response => response.json())
-                .then(response => setFlights(response))
-                .catch(err => console.error(err));
-        }
-
-        console.log(flights);
-
-        // calls the function that fetches the flight data
-        fetchFlights();
-    }, [flights]);
 
     useEffect(() => {
 
@@ -94,33 +69,7 @@ const Home = () => {
                         <Weather weather={weather} />
                     </div>
                 )}
-
-                <div className="home-flights">
-                    <div className="flights-home">
-                        <div className="departure-airport">
-                            <p>Airport:</p>
-                        </div>
-                        <div className="departure-airline">
-                            <p>Airline:</p>
-                        </div>
-                        <div className="flight-number">
-                            <p>Flight Number:</p>
-                        </div>
-                        <div className="departure-time">
-                            <p>Departure Date:</p>
-                            <p>Departure Time:</p>
-                        </div>
-                        <div className="arrival-time">
-                            <p>Arrival Date:</p>
-                            <p>Arrival Time:</p>
-                        </div>
-                    </div>
-                    {flights && _.shuffle(flights).slice(0, 3).map((flight) => (
-                        <div className="flights-widget">
-                            <Flights key={flight.number} flight={flight} />
-                        </div>
-                    ))}
-                </div>
+                
             </div>
 
             {/* if a user is logged in, show them the attraction form */}
