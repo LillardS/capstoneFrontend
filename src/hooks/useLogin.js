@@ -20,7 +20,7 @@ export const useLogin = () => {
         setError(null);
 
         // fetch log in user controller, post login request to server, store response in a variable
-        const response = await fetch('/user/Login', {
+        const response = await fetch('https://capstone-backend-51b9.onrender.com/user/Login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })

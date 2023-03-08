@@ -19,7 +19,7 @@ export const useSignup = () => {
         setError(null);
 
         // fetch sign up user controller, post signup request to server, store response in a variable
-        const response = await fetch('/user/Signup', {
+        const response = await fetch('https://capstone-backend-51b9.onrender.com/user/Signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
