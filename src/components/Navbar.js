@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { slide as Menu } from 'react-burger-menu';
-import { useState } from 'react';
 
 const Navbar = () => {
 
@@ -16,8 +15,6 @@ const Navbar = () => {
     const handleClick = () => {
         logout();
     }
-    
-    const [menuOpen, setMenuOpen] = useState(false);
 
     return (
         <Menu id='navbar' className='navbar-menu'>
