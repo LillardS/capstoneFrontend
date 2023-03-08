@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
+import axios from 'axios'
 
 // pages and components
 import Home from './pages/Home';
@@ -17,6 +18,12 @@ import Header from './components/Header';
 function App() {
   // sets the user to the user in the AuthContext
   const { user } = useAuthContext();
+
+  const upload = async ()=>{
+    const response = await axios.post(
+      "https://capstone-backend-51b9.onrender.com"
+    )
+  }
 
   // html displayed on the index.html for the website, using components and routes
   return (
@@ -68,6 +75,7 @@ function App() {
             />
           </Routes>
         </div>
+     
 
         {/* footer displayed on every page */}
         <Footer />
