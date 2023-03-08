@@ -14,7 +14,7 @@ const Activities = () => {
 
         // on load fetch all attractions and set them for the attraction context.
         const fetchAttractions = async () => {
-            const response = await fetch('/Activities');
+            const response = await fetch('https://capstone-backend-51b9.onrender.com/Activities');
             const json = await response.json();
 
             if (response.ok) {

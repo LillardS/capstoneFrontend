@@ -14,7 +14,7 @@ const Places = () => {
 
         // on load fetch all attractions and set them for the attraction context.
         const fetchAttractions = async () => {
-            const response = await fetch('/Places');
+            const response = await fetch('https://capstone-backend-51b9.onrender.com/Places');
             const json = await response.json();
 
             if (response.ok) {

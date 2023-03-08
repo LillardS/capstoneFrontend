@@ -23,7 +23,7 @@ const Home = () => {
 
         // Fetches and sets all attractions for the home page
         const fetchAttractions = async () => {
-            const response = await fetch('/Home');
+            const response = await fetch('https://capstone-backend-51b9.onrender.com/Home');
             const json = await response.json();
 
             // if fetched data is okay, set the data as attractions
