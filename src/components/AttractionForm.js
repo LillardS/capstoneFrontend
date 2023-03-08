@@ -30,7 +30,7 @@ const AttractionForm = () => {
         
         const attraction = {image, title, hours, address, description, type, venue, rating, likes:0, userName: userName };
 
-        const response = await fetch('/Home', {
+        const response = await fetch('https://capstone-backend-51b9.onrender.com/Home', {
             method: 'POST',
             body: JSON.stringify(attraction, { likes: likes }),
             headers: {

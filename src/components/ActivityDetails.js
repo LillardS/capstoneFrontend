@@ -16,7 +16,7 @@ export const ActivityDetails = ({ activity }) => {
     const handleClick = async () => {
 
         // fetch the delete attraction function from the attraction controller
-        const response = await fetch('/Activities/' + activity._id, {
+        const response = await fetch('https://capstone-backend-51b9.onrender.com/Activities/' + activity._id, {
             method: 'DELETE'
         });
         const json = await response.json();
@@ -36,7 +36,7 @@ export const ActivityDetails = ({ activity }) => {
         }
         
         //fetch the update attraction function from the attraction controller
-        const response = await fetch('/Activities/' + activity._id, {
+        const response = await fetch('https://capstone-backend-51b9.onrender.com/Activities/' + activity._id, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json"
@@ -58,7 +58,7 @@ export const ActivityDetails = ({ activity }) => {
                 }
                 
                 //fetch the update attraction function from the attraction controller
-                const response = await fetch('/Activities/' + activity._id, {
+                const response = await fetch('https://capstone-backend-51b9.onrender.com/Activities/' + activity._id, {
                     method: 'PATCH',
                     headers: {
                         "Content-Type": "application/json"
