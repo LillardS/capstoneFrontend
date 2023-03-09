@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 
 const Contacts = () => {
 
@@ -8,11 +8,15 @@ const Contacts = () => {
     });
 
     // log input for the form to the console
-    const text = document.getElementById('data1');
-    const email = document.getElementById('data2');
+    // const text = document.getElementById('data1');
+    // const email = document.getElementById('data2');
+
+    const [text, setText] = useState('');
+    const [email, setEmail] = useState('');
 
     function print(e) {
         e.preventDefault();
+
         console.log(text.value);
         console.log(email.value);
         text.value = "";
@@ -32,10 +36,10 @@ const Contacts = () => {
                         <li>
                             <form>
                                 <p>Leave a message for me:</p>
-                                <textarea id="data1"></textarea>
+                                <textarea id="data1" onChange={(e) => setText(e.target.value)} value={text}></textarea>
                                 <p>Leave your email so I can get in contact:</p>
                                 <div className="email-submit">
-                                <input type="email" name="data" id="data2" />
+                                <input type="email" name="data" id="data2" onChange={(e) => setEmail(e.target.value)} value={email} />
                                 <button id="submit" type="submit" onClick={print}>Submit</button>
                                 </div>
                             </form>
