@@ -2,25 +2,16 @@ import { useLayoutEffect, useState } from "react";
 
 const Contacts = () => {
 
-    // on page load, scroll to the top of the page
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0);
-    });
-
-    // log input for the form to the console
-    // const text = document.getElementById('data1');
-    // const email = document.getElementById('data2');
-
     const [text, setText] = useState('');
     const [email, setEmail] = useState('');
 
     function print(e) {
         e.preventDefault();
 
-        console.log(text.value);
-        console.log(email.value);
-        text.value = "";
-        email.value = "";
+        console.log(text);
+        console.log(email);
+        setText("");
+        setEmail("");
     }
 
     // html returned on the /Contacts page
